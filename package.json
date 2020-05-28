@@ -1,0 +1,24 @@
+{
+  "name": "com.unity.profiling.core",
+  "displayName": "Unity Profiling Core API",
+  "version": "0.1.0-preview.1",
+  "unity": "2020.1",
+  "description": "The Unity Profiling Core provides an API for code instrumentation markup and statistics collections",
+  "keywords": [
+    "profiler",
+    "profiling",
+    "api"
+  ],
+  "dependencies": {},
+  "relatedPackages": {
+    "com.unity.profiling.core.tests": "0.1.0-preview.1"
+  },
+  "upmCi": {
+    "footprint": "981d0c817060bc96c928b5e54075f8fbb562d579"
+  },
+  "repository": {
+    "url": "https://github.com/Unity-Technologies/profiler.git",
+    "type": "git",
+    "revision": "ed4f72e3ec70a4a6a5cc1699b5b5c67b9bdbbc95"
+  }
+}
