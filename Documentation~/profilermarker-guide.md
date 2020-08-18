@@ -32,7 +32,7 @@ You can add as many Profiler samples as you like: these calls have zero overhead
 
 `ProfilerMarker` represents a named Profiler handle and is the most efficient way of profiling your code. You can use it in any C# code of your application.
 
-## Using ProfilerMarker
+## How to add instrumentation to C# code
 
 You can also use `ProfilerMarker.Auto()` in your code to ensure that `ProfilerMarker.End()` is automatically called at the end of the code block. The following calls are equivalent:
 
@@ -59,7 +59,7 @@ public class MySystemClass
 
 `ProfilerMarker.Auto()` can not be compiled out in non-development (Release) builds but just returns null and thus adding minimal overhead.
 
-## Using ProfilerMarker with integer of floating point parameters
+## How to add integer or floating point parameters to instrumentation sample
 
 Sometimes you might want to provide additional context to your code samples, to identify specific conditions on why the code might have been running for a long time. For example, if your system is carrying out simulations of a number of objects, you can pass the number of objects with a Profiler sample. If you then see an abnormal number along with a long sample duration, that might mean you have to use another thread for simulation or split the CPU work across multiple frames (timeslicing) or even do a game design adjustments to prevent frame drops.
 
@@ -87,7 +87,7 @@ public class MySystemClass
 
 **Note:** The ProfilerMarker supports up to three numeric parameters: [ProfilerMarker\<TP1\>](../api/Unity.Profiling.ProfilerMarker-1.html), [ProfilerMarker\<TP1, TP2\>](../api/Unity.Profiling.ProfilerMarker-2.html) and [ProfilerMarker\<TP1, TP2, TP3\>](../api/Unity.Profiling.ProfilerMarker-3.html).
 
-## Using ProfilerMarker with a string parameter
+## How to add string parameter to instrumentation sample
 
 Similarly, when you load level or data files you might want to see the name of the level or file which took longer than expected to process. Use [ProfilerMarkerExtension](../api/Unity.Profiling.ProfilerMarkerExtension.html) methods to pass a string parameter along with a Profiler sample:
 
@@ -107,7 +107,7 @@ public class MySystemClass
 }
 ```
 
-## Where to see the parameters
+## Where to see the sample parameters in Profiler Window
 
 The samples that `ProfilerMarker.Begin()/End()` or `ProfilerMarker.Auto` generates are visible in **Timeline View** and **Hierarchy View** of the CPU module in the Profiler Window.
 

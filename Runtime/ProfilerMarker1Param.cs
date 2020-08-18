@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Profiling.LowLevel;
 using Unity.Profiling.LowLevel.Unsafe;
@@ -14,7 +15,12 @@ namespace Unity.Profiling
     /// You can pass a single integral or floating point parameter alongside the Begin event.
     /// </summary>
     /// <typeparam name="TP1">int, uint, long, ulong, float or double type.</typeparam>
-    public struct ProfilerMarker<TP1> where TP1 : unmanaged
+#if ENABLE_PROFILER
+    [StructLayout(LayoutKind.Sequential)]
+#else
+    [StructLayout(LayoutKind.Sequential, Size = 0)]
+#endif
+    public readonly struct ProfilerMarker<TP1> where TP1 : unmanaged
     {
 #if ENABLE_PROFILER
         [NativeDisableUnsafePtrRestriction]
@@ -38,8 +44,8 @@ namespace Unity.Profiling
         public ProfilerMarker(string name, string param1Name)
         {
 #if ENABLE_PROFILER
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Default, 1);
             m_P1Type = ProfilerUtility.GetProfilerMarkerDataType<TP1>();
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Default, 1);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, param1Name, m_P1Type, (byte)ProfilerMarkerDataUnit.Undefined);
 #endif
         }
@@ -55,8 +61,8 @@ namespace Unity.Profiling
         public ProfilerMarker(ProfilerCategory category, string name, string param1Name)
         {
 #if ENABLE_PROFILER
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Default, 1);
             m_P1Type = ProfilerUtility.GetProfilerMarkerDataType<TP1>();
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Default, 1);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, param1Name, m_P1Type, (byte)ProfilerMarkerDataUnit.Undefined);
 #endif
         }

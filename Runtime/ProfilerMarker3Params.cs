@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Profiling.LowLevel;
 using Unity.Profiling.LowLevel.Unsafe;
@@ -23,7 +24,12 @@ namespace Unity.Profiling
     /// <typeparam name="TP1">Type of the first parameter.</typeparam>
     /// <typeparam name="TP2">Type of the second parameter.</typeparam>
     /// <typeparam name="TP3">Type of the third parameter.</typeparam>
-    public struct ProfilerMarker<TP1, TP2, TP3>
+#if ENABLE_PROFILER
+    [StructLayout(LayoutKind.Sequential)]
+#else
+    [StructLayout(LayoutKind.Sequential, Size = 0)]
+#endif
+    public readonly struct ProfilerMarker<TP1, TP2, TP3>
         where TP1 : unmanaged
         where TP2 : unmanaged
         where TP3 : unmanaged
@@ -32,6 +38,7 @@ namespace Unity.Profiling
         [NativeDisableUnsafePtrRestriction]
         [NonSerialized]
         readonly IntPtr m_Ptr;
+
         // m_P1Type is initialized as a member variable to support usage in Burst.
         // Avoiding cctor generation allows us to:
         // 1) Use generic approach.
@@ -56,10 +63,10 @@ namespace Unity.Profiling
         public ProfilerMarker(string name, string param1Name, string param2Name, string param3Name)
         {
 #if ENABLE_PROFILER
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Default, 2);
             m_P1Type = ProfilerUtility.GetProfilerMarkerDataType<TP1>();
             m_P2Type = ProfilerUtility.GetProfilerMarkerDataType<TP2>();
             m_P3Type = ProfilerUtility.GetProfilerMarkerDataType<TP3>();
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Default, 2);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, param1Name, m_P1Type, (byte)ProfilerMarkerDataUnit.Undefined);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param2Name, m_P2Type, (byte)ProfilerMarkerDataUnit.Undefined);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param3Name, m_P3Type, (byte)ProfilerMarkerDataUnit.Undefined);
@@ -79,10 +86,10 @@ namespace Unity.Profiling
         public ProfilerMarker(ProfilerCategory category, string name, string param1Name, string param2Name, string param3Name)
         {
 #if ENABLE_PROFILER
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Default, 2);
             m_P1Type = ProfilerUtility.GetProfilerMarkerDataType<TP1>();
             m_P2Type = ProfilerUtility.GetProfilerMarkerDataType<TP2>();
             m_P3Type = ProfilerUtility.GetProfilerMarkerDataType<TP3>();
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Default, 2);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, param1Name, m_P1Type, (byte)ProfilerMarkerDataUnit.Undefined);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param2Name, m_P2Type, (byte)ProfilerMarkerDataUnit.Undefined);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param3Name, m_P3Type, (byte)ProfilerMarkerDataUnit.Undefined);
