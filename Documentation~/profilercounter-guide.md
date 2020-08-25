@@ -68,11 +68,11 @@ public class Shell : MonoBehaviour
 {
     void Awake()
     {
-        GameStats.BulletCount.RawValue += 1;
+        GameStats.BulletCount.Value += 1;
     }
     void OnDestroy()
     {
-        GameStats.BulletCount.RawValue -= 1;
+        GameStats.BulletCount.Value -= 1;
     }
 }
 ```

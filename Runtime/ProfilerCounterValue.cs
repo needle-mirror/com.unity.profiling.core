@@ -128,7 +128,7 @@ namespace Unity.Profiling
                     return *m_Value;
                 }
 #else
-                return (T)0;
+                return default;
 #endif
             }
 

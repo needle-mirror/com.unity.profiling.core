@@ -126,10 +126,10 @@ namespace Unity.Profiling
         /// <summary>
         /// A helper struct that automatically calls End on Dispose. Used with the *using* statement.
         /// </summary>
-        public struct AutoScope : IDisposable
+        public readonly struct AutoScope : IDisposable
         {
 #if ENABLE_PROFILER
-            ProfilerMarker<TP1, TP2> m_Marker;
+            readonly ProfilerMarker<TP1, TP2> m_Marker;
 #endif
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -180,7 +180,7 @@ namespace Unity.Profiling
 #if ENABLE_PROFILER
             return new AutoScope(this, p1, p2);
 #else
-            return null;
+            return default;
 #endif
         }
     }
