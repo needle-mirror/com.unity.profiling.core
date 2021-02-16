@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
@@ -41,23 +41,7 @@ namespace Unity.Profiling
         {
 #if ENABLE_PROFILER
             m_Type = ProfilerUtility.GetProfilerMarkerDataType<T>();
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Counter, 1);
-            ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, null, m_Type, (byte)dataUnit);
-#endif
-        }
-
-        /// <summary>
-        /// Constructs a **ProfilerCounter** that is reported to the Unity Profiler whenever you call Sample().
-        /// </summary>
-        /// <param name="category">Profiler category.</param>
-        /// <param name="name">Name of ProfilerCounter.</param>
-        /// <param name="dataUnit">Value unit type.</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ProfilerCounter(ProfilerCategory category, string name, MarkerFlags flags, ProfilerMarkerDataUnit dataUnit)
-        {
-#if ENABLE_PROFILER
-            m_Type = ProfilerUtility.GetProfilerMarkerDataType<T>();
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, flags | MarkerFlags.Counter, 1);
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Counter, 1);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, null, m_Type, (byte)dataUnit);
 #endif
         }

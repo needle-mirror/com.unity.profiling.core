@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
@@ -66,10 +66,10 @@ namespace Unity.Profiling
             m_P1Type = ProfilerUtility.GetProfilerMarkerDataType<TP1>();
             m_P2Type = ProfilerUtility.GetProfilerMarkerDataType<TP2>();
             m_P3Type = ProfilerUtility.GetProfilerMarkerDataType<TP3>();
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Default, 2);
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, ProfilerUnsafeUtility.CategoryScripts, MarkerFlags.Default, 3);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, param1Name, m_P1Type, (byte)ProfilerMarkerDataUnit.Undefined);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param2Name, m_P2Type, (byte)ProfilerMarkerDataUnit.Undefined);
-            ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param3Name, m_P3Type, (byte)ProfilerMarkerDataUnit.Undefined);
+            ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 2, param3Name, m_P3Type, (byte)ProfilerMarkerDataUnit.Undefined);
 #endif
         }
 
@@ -89,10 +89,10 @@ namespace Unity.Profiling
             m_P1Type = ProfilerUtility.GetProfilerMarkerDataType<TP1>();
             m_P2Type = ProfilerUtility.GetProfilerMarkerDataType<TP2>();
             m_P3Type = ProfilerUtility.GetProfilerMarkerDataType<TP3>();
-            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Default, 2);
+            m_Ptr = ProfilerUnsafeUtility.CreateMarker(name, category, MarkerFlags.Default, 3);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 0, param1Name, m_P1Type, (byte)ProfilerMarkerDataUnit.Undefined);
             ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param2Name, m_P2Type, (byte)ProfilerMarkerDataUnit.Undefined);
-            ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 1, param3Name, m_P3Type, (byte)ProfilerMarkerDataUnit.Undefined);
+            ProfilerUnsafeUtility.SetMarkerMetadata(m_Ptr, 2, param3Name, m_P3Type, (byte)ProfilerMarkerDataUnit.Undefined);
 #endif
         }
 

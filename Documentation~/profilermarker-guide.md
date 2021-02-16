@@ -68,20 +68,20 @@ using Unity.Profiling;
 
 public class MySystemClass
 {
-	static readonly ProfilerMarker<int> k_PreparePerfMarker = new ProfilerMarker<int>("MySystem.Prepare", "Objects Count");
-	static readonly ProfilerMarker<float> k_SimulatePerfMarker = new ProfilerMarker<float>(ProfilerCategory.Scripts, "MySystem.Simulate", "Objects Density");
+  static readonly ProfilerMarker<int> k_PreparePerfMarker = new ProfilerMarker<int>("MySystem.Prepare", "Objects Count");
+  static readonly ProfilerMarker<float> k_SimulatePerfMarker = new ProfilerMarker<float>(ProfilerCategory.Scripts, "MySystem.Simulate", "Objects Density");
 
-	public void Update(int objectsCount)
-	{
-		k_PreparePerfMarker.Begin(objectsCount);
-		// ...
-		k_PreparePerfMarker.End();
+  public void Update(int objectsCount)
+  {
+    k_PreparePerfMarker.Begin(objectsCount);
+    // ...
+    k_PreparePerfMarker.End();
 
-		using (k_SimulatePerfMarker.Auto(objectsCount * 1.0f))
-		{
-			// ...
-		}
-	}
+    using (k_SimulatePerfMarker.Auto(objectsCount * 1.0f))
+    {
+      // ...
+    }
+  }
 }
 ```
 
@@ -96,14 +96,14 @@ using Unity.Profiling;
 
 public class MySystemClass
 {
-	static readonly ProfilerMarker k_PreparePerfMarker = new ProfilerMarker("MySystem.Prepare");
+  static readonly ProfilerMarker k_PreparePerfMarker = new ProfilerMarker("MySystem.Prepare");
 
-	public void Prepare(string path)
-	{
-		k_PreparePerfMarker.Begin(path);
-		// ...
-		k_PreparePerfMarker.End();
-	}
+  public void Prepare(string path)
+  {
+    k_PreparePerfMarker.Begin(path);
+    // ...
+    k_PreparePerfMarker.End();
+  }
 }
 ```
 

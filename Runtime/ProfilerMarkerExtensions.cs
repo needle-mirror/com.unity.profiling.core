@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using Unity.Collections.LowLevel.Unsafe;
@@ -144,7 +144,7 @@ namespace Unity.Profiling
         public static unsafe void Begin(this ProfilerMarker marker, string metadata)
         {
             var data = new ProfilerMarkerData { Type = (byte)ProfilerMarkerDataType.String16 };
-            fixed (char* c = metadata)
+            fixed(char* c = metadata)
             {
                 data.Size = ((uint)metadata.Length + 1) * 2;
                 data.Ptr = c;
