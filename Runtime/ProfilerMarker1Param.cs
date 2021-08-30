@@ -18,7 +18,7 @@ namespace Unity.Profiling
 #if ENABLE_PROFILER
     [StructLayout(LayoutKind.Sequential)]
 #else
-    [StructLayout(LayoutKind.Sequential, Size = 0)]
+    [StructLayout(LayoutKind.Sequential, Size = 1)]
 #endif
     public readonly struct ProfilerMarker<TP1> where TP1 : unmanaged
     {
