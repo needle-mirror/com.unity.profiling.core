@@ -7,7 +7,7 @@ If you are an Asset Store package developer, you can add Profiler counters to yo
 The following diagram displays a high level overview of the Profiler counters data flow:
 ![Profiler counters flow.](images/profilercounter_flow.png)<br/>*Profiler counters flow.*
 
-The [ProfilerRecorder](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Unity.Profiling.ProfilerRecorder.html) API retrieves Profiler counter data in your application code, and the [RawFrameDataView](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.RawFrameDataView.html) or [HierarchyFrameDataView](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.HierarchyFrameDataView.html) APIs retrieves Profiler counter data in the Editor code. Additionally, you can visualize this counter data in the Profiler Window by [configuring a custom Profiler Module in the Module Editor](#viewing-counters).
+The [ProfilerRecorder](https://docs.unity3d.com/ScriptReference/Unity.Profiling.ProfilerRecorder.html) API retrieves Profiler counter data in your application code, and the [RawFrameDataView](https://docs.unity3d.com/ScriptReference/Profiling.RawFrameDataView.html) or [HierarchyFrameDataView](https://docs.unity3d.com/ScriptReference/Profiling.HierarchyFrameDataView.html) APIs retrieves Profiler counter data in the Editor code. Additionally, you can visualize this counter data in the Profiler Window by [configuring a custom Profiler Module in the Module Editor](#viewing-counters).
 
 `ProfilerCounter` and `ProfilerCounterValue` support the following types:
 
@@ -98,7 +98,7 @@ If you don't see your counters appearing in the Module Editor, record some data 
 
 ## Getting counter values in Players
 
-Profiler counters give you an insight into important game or engine system metrics. If you have a continious integration setup or want to visualize key performance metrics in your application during a test play through you can use the [ProfilerRecorder](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Unity.Profiling.ProfilerRecorder.html) API to get custom Profiler counter values as well as Unity built-in counters.
+Profiler counters give you an insight into important game or engine system metrics. If you have a continuous integration setup or want to visualize key performance metrics in your application during a test play through you can use the [ProfilerRecorder](https://docs.unity3d.com/ScriptReference/Unity.Profiling.ProfilerRecorder.html) API to get custom Profiler counter values as well as Unity built-in counters.
 
 For example, the following script displays the frame time, Mono/IL2CPP heap size, and total memory that the application uses.
 
@@ -167,13 +167,13 @@ public class StatsScript : MonoBehaviour
 Don't forget to use `ProfilerRecorder.Dispose()` to free unmanaged resources associated with the `ProfilerRecorder`.
 
 >[!NOTE]
->Not all Profiler counters are available in the Release Players. Use [ProfilerRecorder.Valid](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Unity.Profiling.ProfilerRecorder.Valid.html) to determine if the data is available and the Profiler can record it. Alternatively, you can use [ProfilerRecorderHandle.GetAvailable](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Unity.Profiling.LowLevel.Unsafe.ProfilerRecorderHandle.GetAvailable.html) to enumerate all available Profiler stats.
+>Not all Profiler counters are available in the Release Players. Use [ProfilerRecorder.Valid](https://docs.unity3d.com/ScriptReference/Unity.Profiling.ProfilerRecorder.Valid.html) to determine if the data is available and that the Profiler can record it. Alternatively, you can use [ProfilerRecorderHandle.GetAvailable](https://docs.unity3d.com/ScriptReference/Unity.Profiling.LowLevel.Unsafe.ProfilerRecorderHandle.GetAvailable.html) to enumerate all available Profiler stats.
 
 ## Getting counter values from Profiler Frame data in the Editor
 
-To get Profiler counter values when processing Profiler frame data in the Editor, use the [FrameDataView](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.FrameDataView.html) API. 
+To get Profiler counter values when processing Profiler frame data in the Editor, use the [FrameDataView](https://docs.unity3d.com/ScriptReference/Profiling.FrameDataView.html) API. 
 
-You can use the [FrameDataView.GetCounterValueAsInt](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.FrameDataView.GetCounterValueAsInt.html), [FrameDataView.GetCounterValueAsLong](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.FrameDataView.GetCounterValueAsLong.html), [FrameDataView.GetCounterValueAsFloat](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.FrameDataView.GetCounterValueAsFloat.html) and [FrameDataView.GetCounterValueAsDouble](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/Profiling.FrameDataView.GetCounterValueAsDouble.html) to get a frame value of the specific counter, like so:
+You can use the [FrameDataView.GetCounterValueAsInt](https://docs.unity3d.com/ScriptReference/Profiling.FrameDataView.GetCounterValueAsInt.html), [FrameDataView.GetCounterValueAsLong](https://docs.unity3d.com/ScriptReference/Profiling.FrameDataView.GetCounterValueAsLong.html), [FrameDataView.GetCounterValueAsFloat](https://docs.unity3d.com/ScriptReference/Profiling.FrameDataView.GetCounterValueAsFloat.html) and [FrameDataView.GetCounterValueAsDouble](https://docs.unity3d.com/ScriptReference/Profiling.FrameDataView.GetCounterValueAsDouble.html) to get a frame value of the specific counter, like so:
 
 ```c#
 using UnityEditor.Profiling;
